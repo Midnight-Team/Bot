@@ -1,0 +1,11 @@
+{
+  "manage_reaction_roles": "Verwalte Reaktionsrollen",
+  "reaction_role": "Reaktionsrolle",
+  "add_emoji_and_role": "Füge das Emoji und die Rolle hinzu",
+  "channel_note": "Achtung: Der Kanal kann nicht geändert werden, nachdem die Nachricht gesendet wurde",
+  "no_roles_yet": "Noch keine Rollen",
+  "channel": "Kanal",
+  "roles": "Rollen",
+  "no_reaction_roles": "Dieser Server hat noch keine Reaktionsrollen.",
+  "add_reaction_role": "Füge Reaktionsrolle hinzu"
+}

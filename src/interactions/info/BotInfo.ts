@@ -1,0 +1,97 @@
+import * as DJS from "discord.js";
+import { hyperlink, inlineCode } from "@discordjs/builders";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import { Bot } from "structures/Bot";
+import { SubCommand } from "structures/Command/SubCommand";
+dayjs.extend(duration);
+
+export default class BotInfoCommand extends SubCommand {
+  constructor(bot: Bot) {
+    super(bot, {
+      commandName: "info",
+      name: "bot",
+      description: "Get information about Midnight",
+    });
+  }
+
+  async execute(
+    interaction: DJS.CommandInteraction,
+    lang: typeof import("@locales/english").default,
+  ) {
+    await interaction.deferReply();
+
+    const uptime = dayjs
+      .duration(this.bot?.uptime ?? 0)
+      .format(" D [days], H [hrs], m [mins], s [secs]");
+
+    const userCount = this.bot.utils.formatNumber(
+      this.bot.guilds.cache.reduce((a, g) => a + g.memberCount, 0),
+    );
+
+    const latency = Math.round(this.bot.ws.ping).toString();
+    const ramUsage = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2);
+
+    const botRepo = hyperlink(
+      lang.BOT.CLICK_HERE,
+      "https://github.com/Midnight-Team/Bot",
+    );
+    const supportServer = hyperlink(lang.BOT.CLICK_HERE, "https://discord.gg/kAFm2aQDNj");
+    const dashboard = hyperlink(lang.BOT.CLICK_HERE, process.env["NEXT_PUBLIC_DASHBOARD_URL"]!);
+
+    const commandCount = this.bot.utils.commandCount;
+
+    const botDeveloper = hyperlink(lang.BOT.DEVELOPER, "https://chillyy.repl.co");
+    const contributors = hyperlink(
+      lang.BOT.CONTRIBUTORS,
+      "https://github.com/Midnight-Team/Bot/contributors",
+    );
+    const botInvite = hyperlink(
+      lang.BOT.INVITE_BOT,
+      `https://discord.com/oauth2/authorize?client_id=${this.bot.user?.id}&scope=applications.commands+bot&permissions=8`,
+    );
+
+    const embed = this.bot.utils
+      .baseEmbed(interaction)
+      .setTitle(lang.BOT.INFO_2)
+      .setDescription(
+        `
+      **${lang.BOT.LATENCY}:** ${latency}
+      **${lang.BOT.UPTIME}:** ${uptime}
+      `,
+      )
+      .addField(
+        lang.BOT.INFO,
+        `
+**${lang.BOT.USERS}:** ${inlineCode(userCount)}
+**${lang.BOT.GUILDS}:** ${inlineCode(this.bot.utils.formatNumber(this.bot.guilds.cache.size))}
+**${lang.BOT.CHANNELS}:** ${inlineCode(this.bot.utils.formatNumber(this.bot.channels.cache.size))}
+**${lang.BOT.COMMAND_COUNT}:** ${inlineCode(this.bot.utils.formatNumber(commandCount))}
+`,
+        true,
+      )
+      .addField(
+        lang.BOT.SYSTEM_INFO,
+        `
+**${lang.BOT.RAM_USAGE}:**  ${ramUsage}MB
+**${lang.BOT.DJS_V}:** v13`,
+        true,
+      )
+      .addField(
+        "Links",
+        `
+${botDeveloper}
+${contributors}
+${botInvite}`,
+        true,
+      )
+      .addField(lang.BOT.REPO, botRepo, true)
+      .addField(lang.UTIL.SUPPORT_SERVER, supportServer, true)
+      .addField(lang.BOT.DASHBOARD, dashboard, true)
+      .setImage(
+        "https://raw.githubusercontent.com/ChilledLiquid/Midnight/main/.github/Midnight-banner.png",
+      );
+
+    await interaction.editReply({ embeds: [embed] });
+  }
+}

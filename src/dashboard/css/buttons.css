@@ -1,0 +1,61 @@
+.btn {
+  padding: 0.6rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  border-radius: var(--main-br);
+  background: var(--secondary);
+  transition: 200ms;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-link {
+  text-decoration: underline;
+  background: none;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.5rem !important;
+}
+
+.btn-red {
+  background: var(--red);
+  color: #111111;
+  font-weight: 600;
+  transition: filter 200ms;
+}
+
+.btn-secondary {
+  background: var(--primary);
+}
+
+.btn-primary:focus,
+.btn-secondary:focus {
+  background: var(--blue);
+  outline: none;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .btn-primary:is(a):hover,
+  .btn-secondary:is(a):hover {
+    background: var(--blue);
+  }
+
+  .btn-primary:enabled:hover,
+  .btn-secondary:enabled:hover {
+    background: var(--blue);
+  }
+
+  .btn-red:enabled:hover {
+    filter: brightness(120%);
+  }
+  .btn-red:is(a):hover {
+    filter: brightness(120%);
+  }
+}

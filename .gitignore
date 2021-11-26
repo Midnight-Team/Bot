@@ -1,0 +1,22 @@
+config.json
+node_modules
+build/
+.next/
+.env
+.DS_STORE
+.vscode/
+giveaways.json
+dist/
+package-lock.json
+
+# remove service workers, will be present when running `npm run build`.
+public/*.js
+public/*.map
+public/sitemap.xml
+descriptions_data.json
+
+.husky/_
+.husky/.gitignore
+
+test.html
+tsconfig.tsbuildinfo

@@ -20,7 +20,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/Midnight-Team/Bot">
     <img src="https://cdn.discordapp.com/avatars/889722439100141579/98d1ac88e73b2e1416077f1e169a6257.png?size=4096" alt="Logo" width="80" height="80">
   </a>
 

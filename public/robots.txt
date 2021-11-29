@@ -1,9 +1,1 @@
-# *
-User-agent: *
-Allow: /
 
-# Host
-Host: https://ult15.falix.gg:30352
-
-# Sitemaps
-Sitemap: https://ult15.fal/api/auth/callback

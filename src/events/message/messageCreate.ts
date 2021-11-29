@@ -135,18 +135,41 @@ export default class MessageEvent extends Event {
       }
 
       // bot mention
+      const BUTTONSMENTION = [
+        new DJS.MessageButton()
+          .setLabel("Open Dashboard")
+          .setStyle("LINK")
+          .setURL("http://dashboard.midnightbot.tk:30352"),
+        new DJS.MessageButton()
+          .setLabel("Support Server")
+          .setStyle("LINK")
+          .setURL("https://discord.gg/kAFm2aQDNj"),
+        new DJS.MessageButton()
+          .setLabel("Website")
+          .setStyle("LINK")
+          .setURL("https://midnightbot.tk"),
+        new DJS.MessageButton()
+          .setLabel("Docs")
+          .setStyle("LINK")
+          .setURL("https://docs.midnightbot.tk")
+      ];
+      const rowMentionMessage = new DJS.MessageActionRow().addComponents(BUTTONSMENTION);
+      const prefixmention = `\`\`\`css\n[  Prefix: '/'  ]\`\`\``;
+      const prefixhelp = `\`\`\`css\n[     Help: /help   ]\`\`\``;
+      const imagemessage = "https://cdn.discordapp.com/avatars/889722439100141579/98d1ac88e73b2e1416077f1e169a6257.webp?size=4096"
       if (mentions?.first()?.id === bot.user.id) {
         const embed = bot.utils
           .baseEmbed(message)
-          .setTitle("Quick Info")
-          .addField("Help command", "/help")
-          .addField(lang.MESSAGE.SUPPORT, "https://discord.gg/kAFm2aQDNj")
-          .addField(
-            lang.BOT.DASHBOARD,
-            process.env["NEXT_PUBLIC_DASHBOARD_URL"] ?? "http://dashboard.midnightbot.tk:30352",
-          );
+          .setTitle('Midnight - An advanced discord bot.')
+          .setThumbnail(imagemessage)
+          .addField(`Links`, `**[Support](https://discord.gg/kAFm2aQDNj)** • **[Website](https://midnightbot.tk)** • **[Docs](https://docs.midnightbot.tk)** • **[GitHub](https://github.com/Midnight-Team)**`)
+          .addField(`Prefix`,prefixmention, true)
+          .addField(`Usage`,prefixhelp, true)
+          .setDescription(`\nHey, I'm Midnight, an advanced discord bot designed to make your server setup easier.\n\n **Features**: \n\n• \📌 200+ Commands\n• \📌Dashboard\n• \📌 Open sourced\n\n Midnight offers a lot of services to boost your server, such as moderation, utility, music and economy commands. \n\n**Thanks for using Midnight!**`)
+          .setFooter(`Midnight - Open source - A discord bot`)
+          .setColor('#FF2C98')
 
-        return message.channel.send({ embeds: [embed] });
+        return message.channel.send({ embeds: [embed], components: [rowMentionMessage] });
       }
 
       if (

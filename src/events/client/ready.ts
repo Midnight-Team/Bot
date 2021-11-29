@@ -35,7 +35,7 @@ export default class ReadyEvent extends Event {
       },
       {
         type: "PLAYING",
-        value: "",
+        value: "☕・Github :: github.com/Midnight-Team",
       },
     ];
 
